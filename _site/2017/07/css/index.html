@@ -1,0 +1,39 @@
+<div class="highlighter-rouge"><pre class="highlight"><code>#container {
+  		float: left;
+  		margin: 0 -240px 0 0;
+  		width: 100%;
+}
+</code></pre>
+</div>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python">    <span class="c"># 读取文件内容  </span>
+	<span class="k">def</span> <span class="nf">fread</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  
+  
+        <span class="c"># 如果指针位置大于文件大小，说明是更换了文件  </span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">filename</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getLogPath</span><span class="p">()</span>  
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">):</span>  
+            <span class="k">while</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">checkfile</span><span class="p">()</span> <span class="p">:</span>  
+                <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>  
+                <span class="bp">self</span><span class="o">.</span><span class="n">filename</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getLogPath</span><span class="p">()</span>  
+  
+            <span class="bp">self</span><span class="o">.</span><span class="n">fclose</span><span class="p">()</span>  
+            <span class="bp">self</span><span class="o">.</span><span class="n">fopen</span><span class="p">()</span>  
+            <span class="bp">self</span><span class="o">.</span><span class="n">pos</span> <span class="o">=</span> <span class="mi">0</span>  
+  
+  
+        <span class="bp">self</span><span class="o">.</span><span class="n">hd</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pos</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>  
+        <span class="n">fline</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hd</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>  
+        <span class="bp">self</span><span class="o">.</span><span class="n">pos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hd</span><span class="o">.</span><span class="n">tell</span><span class="p">()</span>  
+        <span class="k">return</span> <span class="n">fline</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="s">""</span><span class="p">)</span>  
+  
+  
+  
+  
+    <span class="c"># 将文件指针定位到文件尾部  </span>
+    <span class="k">def</span> <span class="nf">feof</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  
+        <span class="bp">self</span><span class="o">.</span><span class="n">fopen</span><span class="p">()</span>  
+        <span class="c"># 定位到文件末尾  </span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hd</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>  
+        <span class="c">#设置指针位置  </span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hd</span><span class="o">.</span><span class="n">tell</span><span class="p">()</span>  </code></pre></figure>
+
