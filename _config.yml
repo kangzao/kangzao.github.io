@@ -40,9 +40,10 @@ ga:
 
 permalink: /:year/:month/:title/
 # Format
-highlighter: rouge
+#highlighter: rouge
 
 markdown: kramdown
+highlighter: rouge
 
 textColor: #FF0000
 
