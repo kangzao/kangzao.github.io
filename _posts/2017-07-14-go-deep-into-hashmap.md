@@ -2,6 +2,7 @@
 title: 深入理解hashmap
 published: true
 layout: post
+tag: core java
 ---
 
 ### 一、hashmap的数据结构

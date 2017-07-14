@@ -5,8 +5,8 @@
     <description>欢迎来到我的个人站~</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 14 Jul 2017 17:25:38 +0800</pubDate>
-    <lastBuildDate>Fri, 14 Jul 2017 17:25:38 +0800</lastBuildDate>
+    <pubDate>Fri, 14 Jul 2017 17:29:12 +0800</pubDate>
+    <lastBuildDate>Fri, 14 Jul 2017 17:29:12 +0800</lastBuildDate>
     <generator>Jekyll v3.5.0</generator>
     
       <item>
@@ -166,6 +166,8 @@ Cpu&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;s&lt;span class=&quot;o&quot;&g
         <pubDate>Fri, 14 Jul 2017 00:00:00 +0800</pubDate>
         <link>http://localhost:4000/2017/07/go-deep-into-hashmap/</link>
         <guid isPermaLink="true">http://localhost:4000/2017/07/go-deep-into-hashmap/</guid>
+        
+        <category>core java</category>
         
         
       </item>
