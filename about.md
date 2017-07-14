@@ -11,11 +11,5 @@ title: 关于我
 
 <p>
 
-所在公司
-<a target="_blank" href="https://www.alipay.com/"> alipay </a>
-<p>
-
-{% include comments.html %}
-
 
 
