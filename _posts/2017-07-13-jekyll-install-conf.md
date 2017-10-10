@@ -3,7 +3,7 @@ layout: post
 title: jekyll安装及配置
 date: 2017-07-13
 description: jekyll安装及配置
-tag: 博客
+tag: jekyll
 published: true
 ---
 

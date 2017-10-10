@@ -5,8 +5,8 @@
     <description>欢迎来到我的个人站~</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 10 Oct 2017 19:05:13 +0800</pubDate>
-    <lastBuildDate>Tue, 10 Oct 2017 19:05:13 +0800</lastBuildDate>
+    <pubDate>Tue, 10 Oct 2017 19:11:43 +0800</pubDate>
+    <lastBuildDate>Tue, 10 Oct 2017 19:11:43 +0800</lastBuildDate>
     <generator>Jekyll v3.5.0</generator>
     
       <item>
@@ -340,6 +340,8 @@ vi xxx.xxx.class
         <link>http://localhost:4000/2017/07/tools-for-production/</link>
         <guid isPermaLink="true">http://localhost:4000/2017/07/tools-for-production/</guid>
         
+        <category>issue</category>
+        
         
       </item>
     
@@ -655,7 +657,7 @@ Dependency Error: Yikes! It looks like you don’t have jekyll-sitemap or one of
         <link>http://localhost:4000/2017/07/jekyll-install-conf/</link>
         <guid isPermaLink="true">http://localhost:4000/2017/07/jekyll-install-conf/</guid>
         
-        <category>博客</category>
+        <category>jekyll</category>
         
         
       </item>
