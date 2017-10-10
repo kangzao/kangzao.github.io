@@ -3,6 +3,7 @@ layout: post
 title: 线上问题排查基本方法
 published: true
 date: 2017-07-31
+tag: issue
 ---
 
 ## 一、Linux命令
