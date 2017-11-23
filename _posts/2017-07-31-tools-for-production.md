@@ -33,6 +33,16 @@ seq 10 | grep 5 -A 3    #上匹配 -A表示after
 seq 10 | grep 5 -B 3    #下匹配 -B表示before
 seq 10 | grep 5 -C 3    #上下匹配
 
+grep -F 的使用技巧
+
+举例子，当我们这条命令会导致cpu很高，主要是有个“.” ，被grep认为是正则表达式
+grep "xx.xx" xx.log
+
+加上-F参数可以避免
+-F fixed-string，看成一个字符串
+grep "xx.xx" xx.log -F
+所以在grep的时候，字符串有个.要注意，可以加grep -F 避免。
+
 ```
 
 ### tail
