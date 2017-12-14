@@ -1,69 +1,61 @@
-# Basic
+# Welcome to Jekyll!
+#
+# This config file is meant for settings that affect your whole blog, values
+# which you are expected to set up once and rarely need to edit after that.
+# For technical reasons, this file is *NOT* reloaded automatically when you use
+# 'jekyll serve'. If you change this file, please restart the server process.
+
+# Site settings
 title: 恩来小平
-subtitle: 个人站
-description: 欢迎来到我的个人站~
-# 头像里面的标题
-avatarTitle: 恩来小平
-# 头像里面的描述
-avatarDesc: 技术 / 生活
-url: "https://kangzao.github.io/"
+brief-intro: Dev Engineer
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "https://kangzao.github.io" # the base hostname & protocol for your site
 
-# Comment
-comment:
-    # disqus: leopard
-    # duoshuo: leopard 
-    # cloudTie: leopard
+permalink: /:year/:month/:day/:title/
 
-# Social
-social:
-    qq:  58761173
-    github: kangzao
-    # twitter: 
-    mail: 58761173@qq.com
+# other links
+twitter_username: 
+facebook_username: 
+github_username:  kangzao
+email: 58761173@qq.com
+weibo_username: 
+zhihu_username: 
+linkedIn_username: 
+dribbble_username:
 
-# 百度统计 
-# 使用博客模板请去掉或者更换 id 
-#baidu:
-    #id: 8ba1c6be0953b6f9c2ba38e57f615421  
+description_footer: 恩来小平的自说自话
 
-# Google Analytics
-# 使用博客模板请去掉或者更换 id
-ga:
-    id: UA-102502932-1   
-    host: auto  
+# comments
+# two ways to comment, only choose one, and use your own short name
+# 两种评论插件，选一个就好了，使用自己的 short_name
+#duoshuo已经关闭，disqus被墙，评论搞不了了
+duoshuo_shortname: 
+disqus_shortname: 
 
+# statistic analysis 统计代码
+# 百度统计 id，将统计代码替换为自己的百度统计id，即
+# hm.src = "//hm.baidu.com/hm.js?xxxxxxxxxxxx";
+# xxxxx字符串
+# baidu_tongji_id: cf8506e0ef223e57ff6239944e5d46a4
+google_analytics_id: UA-102502932-1  # google 分析追踪id
 
-# 《----------------- 上面的信息修改成你自己的 ---------------------------》
-#  _post/ 下的文章更换成你自己的文章
-# 《--------------- 下面的信息可以自行选择是否修改 ------------------------》
-
-
-permalink: /:year/:month/:title/
-# Format
-#highlighter: rouge
-
+# Build settings
 markdown: kramdown
-highlighter: rouge
 
-textColor: #FF0000
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
 
-# supported colors: blue, green, purple, red, orange or slate. If you need clear, leave it empty.
-cover_color: clear
+# port
+# port: 1234
 
-# The blog button should not be removed.
-blog_button:
-    title: 博客主页
+# url
+category_dir: category/
+tag_dir: tag/
 
-# Navigation buttons in the front page.s
-nav:
-    - {title: 所有文章, description: archive, url: '/archive'}   
-    - {title: 标签, description: tags, url: '/tags'}      
-    - {title: 关于我, description: about, url: '/about'}      
-    
+# excerpt
+excerpt_separator: "\n\n\n\n"
 
-# Pagination
+# paginate
 plugins: [jekyll-paginate]
-paginate: 20
-paginate_path: "page/:num/"
-
-
+paginate: 6

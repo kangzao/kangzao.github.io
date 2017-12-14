@@ -1,17 +1,19 @@
 ---
 layout: post
 title: 线上问题排查基本方法
+categories: 线上问题
 published: true
 date: 2017-07-31
-tag: issue
+tag: 线上问题
+author: jep
 ---
 
+* content
+{:toc}
+
 ## 一、Linux命令
-
-
 ### grep
-
-#### 参数说明：
+#### 参数说明
 
 -R, -r, --recursive Recursively search subdirectories listed
 
@@ -42,9 +44,7 @@ grep "xx.xx" xx.log
 -F fixed-string，看成一个字符串
 grep "xx.xx" xx.log -F
 所以在grep的时候，字符串有个.要注意，可以加grep -F 避免。
-
 ```
-
 ### tail
 
 ```shell
@@ -203,7 +203,8 @@ sudo dmesg|grep -i kill|less
 找关键字oom_killer
 
 ## 二、jdk工具
-### jps(Java Virtual Machine Process Status Tool)
+### jps
+Java Virtual Machine Process Status Tool
 在jdk的JAVA_HOME/bin/目录下面，jps也不例外，他就在bin目录下，所以，他是java自带的一个命令。
 
 ### jstack

@@ -2,30 +2,56 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>恩来小平</title>
-    <description>欢迎来到我的个人站~</description>
+    <description></description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 10 Oct 2017 19:11:43 +0800</pubDate>
-    <lastBuildDate>Tue, 10 Oct 2017 19:11:43 +0800</lastBuildDate>
+    <pubDate>Fri, 01 Dec 2017 16:19:46 +0800</pubDate>
+    <lastBuildDate>Fri, 01 Dec 2017 16:19:46 +0800</lastBuildDate>
     <generator>Jekyll v3.5.0</generator>
     
       <item>
         <title>线上问题排查基本方法</title>
-        <description>&lt;h2 id=&quot;一linux命令&quot;&gt;一、Linux命令&lt;/h2&gt;
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#一linux命令&quot; id=&quot;markdown-toc-一linux命令&quot;&gt;一、Linux命令&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#grep&quot; id=&quot;markdown-toc-grep&quot;&gt;grep&lt;/a&gt;        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;#参数说明&quot; id=&quot;markdown-toc-参数说明&quot;&gt;参数说明&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#tail&quot; id=&quot;markdown-toc-tail&quot;&gt;tail&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#awk&quot; id=&quot;markdown-toc-awk&quot;&gt;awk&lt;/a&gt;        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;#内建变量&quot; id=&quot;markdown-toc-内建变量&quot;&gt;内建变量&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#find&quot; id=&quot;markdown-toc-find&quot;&gt;find&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#netstat&quot; id=&quot;markdown-toc-netstat&quot;&gt;netstat&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#dmesg&quot; id=&quot;markdown-toc-dmesg&quot;&gt;dmesg&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#二jdk工具&quot; id=&quot;markdown-toc-二jdk工具&quot;&gt;二、jdk工具&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#jps&quot; id=&quot;markdown-toc-jps&quot;&gt;jps&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#jstack&quot; id=&quot;markdown-toc-jstack&quot;&gt;jstack&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#jinfo&quot; id=&quot;markdown-toc-jinfo&quot;&gt;jinfo&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#jmap&quot; id=&quot;markdown-toc-jmap&quot;&gt;jmap&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#jstatjvm-statistics-monitoring-tool&quot; id=&quot;markdown-toc-jstatjvm-statistics-monitoring-tool&quot;&gt;jstat(JVM Statistics Monitoring Tool)&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#jdb&quot; id=&quot;markdown-toc-jdb&quot;&gt;jdb&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#chlsdb&quot; id=&quot;markdown-toc-chlsdb&quot;&gt;CHLSDB&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
 
+&lt;h2 id=&quot;一linux命令&quot;&gt;一、Linux命令&lt;/h2&gt;
 &lt;h3 id=&quot;grep&quot;&gt;grep&lt;/h3&gt;
+&lt;h4 id=&quot;参数说明&quot;&gt;参数说明&lt;/h4&gt;
 
-&lt;h4 id=&quot;参数说明&quot;&gt;参数说明：&lt;/h4&gt;
+-R, -r, –recursive Recursively search subdirectories listed
 
-&lt;p&gt;-R, -r, –recursive Recursively search subdirectories listed&lt;/p&gt;
+-n, –line-number
 
-&lt;p&gt;-n, –line-number&lt;/p&gt;
+-A num, –after-context=num
 
-&lt;p&gt;-A num, –after-context=num&lt;/p&gt;
+-B num, –before-context=num
 
-&lt;p&gt;-B num, –before-context=num&lt;/p&gt;
-
-&lt;p&gt;-C[num, –context=num]&lt;/p&gt;
+-C[num, –context=num]
 
 &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
 grep xx 1.log 2.log &lt;span class=&quot;c&quot;&gt;#多文件查询&lt;/span&gt;
@@ -36,9 +62,17 @@ seq 10 | grep 5 -A 3    &lt;span class=&quot;c&quot;&gt;#上匹配 -A表示after
 seq 10 | grep 5 -B 3    &lt;span class=&quot;c&quot;&gt;#下匹配 -B表示before&lt;/span&gt;
 seq 10 | grep 5 -C 3    &lt;span class=&quot;c&quot;&gt;#上下匹配&lt;/span&gt;
 
+grep -F 的使用技巧
+
+举例子，当我们这条命令会导致cpu很高，主要是有个“.” ，被grep认为是正则表达式
+grep &lt;span class=&quot;s2&quot;&gt;&quot;xx.xx&quot;&lt;/span&gt; xx.log
+
+加上-F参数可以避免
+-F fixed-string，看成一个字符串
+grep &lt;span class=&quot;s2&quot;&gt;&quot;xx.xx&quot;&lt;/span&gt; xx.log -F
+所以在grep的时候，字符串有个.要注意，可以加grep -F 避免。
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
-
 &lt;h3 id=&quot;tail&quot;&gt;tail&lt;/h3&gt;
 
 &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
@@ -51,11 +85,11 @@ tail -10f 1.log &lt;span class=&quot;c&quot;&gt;#倒数10行并进入实时监�
 
 &lt;h4 id=&quot;内建变量&quot;&gt;内建变量&lt;/h4&gt;
 
-&lt;p&gt;NR:NR表示从awk开始执行后，按照记录分隔符读取的数据次数，默认的记录分隔符为换行符，因此默认的就是读取的数据行数，NR可以理解为Number of Record的缩写。&lt;/p&gt;
+NR:NR表示从awk开始执行后，按照记录分隔符读取的数据次数，默认的记录分隔符为换行符，因此默认的就是读取的数据行数，NR可以理解为Number of Record的缩写。
 
-&lt;p&gt;FNR:在awk处理多个输入文件的时候，在处理完第一个文件后，NR并不会从1开始，而是继续累加，因此就出现了FNR，每当处理一个新文件的时候，FNR就从1开始计数，FNR可以理解为File Number of Record。&lt;/p&gt;
+FNR:在awk处理多个输入文件的时候，在处理完第一个文件后，NR并不会从1开始，而是继续累加，因此就出现了FNR，每当处理一个新文件的时候，FNR就从1开始计数，FNR可以理解为File Number of Record。
 
-&lt;p&gt;NF: NF表示目前的记录被分割的字段的数目，NF可以理解为Number of Field。&lt;/p&gt;
+NF: NF表示目前的记录被分割的字段的数目，NF可以理解为Number of Field。
 
 &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
 awk &lt;span class=&quot;s1&quot;&gt;'{print $0}'&lt;/span&gt; test.txt   &lt;span class=&quot;c&quot;&gt;#打印文件的全部内容(其中的$0就表示整个文件的内容)。&lt;/span&gt;
@@ -185,174 +219,67 @@ find . -type d &lt;span class=&quot;c&quot;&gt;#当前目录下的所有子目�
 &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;netstat -nat|awk  &lt;span class=&quot;s1&quot;&gt;'{print $6}'&lt;/span&gt;|sort|uniq -c|sort -rn &lt;span class=&quot;c&quot;&gt;#查看当前连接，注意close_wait偏高的情况&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
-&lt;p&gt;具体可参考TCP关闭连接的图：&lt;/p&gt;
+具体可参考TCP关闭连接的图：
 
-&lt;p&gt;&lt;img src=&quot;/images/posts/analysis-production/tcp-simultaneous-open.png&quot; alt=&quot;tcp-simultaneous-open.png&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;/images/posts/analysis-production/tcp-simultaneous-open.png&quot; alt=&quot;tcp-simultaneous-open.png&quot; /&gt;
 
 &lt;h3 id=&quot;dmesg&quot;&gt;dmesg&lt;/h3&gt;
 &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo dmesg|grep -i &lt;span class=&quot;nb&quot;&gt;kill&lt;/span&gt;|less
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
-&lt;p&gt;找关键字oom_killer&lt;/p&gt;
+找关键字oom_killer
 
 &lt;h2 id=&quot;二jdk工具&quot;&gt;二、jdk工具&lt;/h2&gt;
-&lt;h3 id=&quot;jpsjava-virtual-machine-process-status-tool&quot;&gt;jps(Java Virtual Machine Process Status Tool)&lt;/h3&gt;
-&lt;p&gt;在jdk的JAVA_HOME/bin/目录下面，jps也不例外，他就在bin目录下，所以，他是java自带的一个命令。&lt;/p&gt;
+&lt;h3 id=&quot;jps&quot;&gt;jps&lt;/h3&gt;
+Java Virtual Machine Process Status Tool
+在jdk的JAVA_HOME/bin/目录下面，jps也不例外，他就在bin目录下，所以，他是java自带的一个命令。
 
 &lt;h3 id=&quot;jstack&quot;&gt;jstack&lt;/h3&gt;
-&lt;p&gt;jstack用于生成java虚拟机当前时刻的线程快照。线程快照是当前java虚拟机内每一条线程正在执行的方法堆栈的集合，生成线程快照的主要目的是定位线程出现长时间停顿的原因，如线程间死锁、死循环、请求外部资源导致的长时间等待等。 
-参考：http://www.importnew.com/18176.html&lt;/p&gt;
+jstack用于生成java虚拟机当前时刻的线程快照。线程快照是当前java虚拟机内每一条线程正在执行的方法堆栈的集合，生成线程快照的主要目的是定位线程出现长时间停顿的原因，如线程间死锁、死循环、请求外部资源导致的长时间等待等。 
+参考：http://www.importnew.com/18176.html
 
 &lt;h3 id=&quot;jinfo&quot;&gt;jinfo&lt;/h3&gt;
-&lt;p&gt;查看系统启动的参数。&lt;/p&gt;
+查看系统启动的参数。
 
 &lt;h3 id=&quot;jmap&quot;&gt;jmap&lt;/h3&gt;
-&lt;p&gt;主要用于打印指定Java进程(或核心文件、远程调试服务器)的共享对象内存映射或堆内存细节。
-具体参考：http://www.importnew.com/18196.html&lt;/p&gt;
+主要用于打印指定Java进程(或核心文件、远程调试服务器)的共享对象内存映射或堆内存细节。
+具体参考：http://www.importnew.com/18196.html
 
 &lt;h3 id=&quot;jstatjvm-statistics-monitoring-tool&quot;&gt;jstat(JVM Statistics Monitoring Tool)&lt;/h3&gt;
-&lt;p&gt;用于监控虚拟机各种运行状态信息的命令行工具.
-具体参考： http://www.importnew.com/18202.html&lt;/p&gt;
+用于监控虚拟机各种运行状态信息的命令行工具.
+具体参考： http://www.importnew.com/18202.html
 
 &lt;h3 id=&quot;jdb&quot;&gt;jdb&lt;/h3&gt;
-&lt;p&gt;具体参考： http://docs.oracle.com/javase/7/docs/technotes/tools/windows/jdb.html&lt;/p&gt;
+具体参考： http://docs.oracle.com/javase/7/docs/technotes/tools/windows/jdb.html
 
 &lt;h3 id=&quot;chlsdb&quot;&gt;CHLSDB&lt;/h3&gt;
-&lt;p&gt;参考 http://rednaxelafx.iteye.com/blog/1847971&lt;/p&gt;
-
-&lt;h2 id=&quot;三排查利器&quot;&gt;三、排查利器&lt;/h2&gt;
-&lt;h3 id=&quot;btrace&quot;&gt;btrace&lt;/h3&gt;
-&lt;p&gt;具体参考 https://github.com/btraceio/btrace&lt;/p&gt;
-
-&lt;h3 id=&quot;javosize&quot;&gt;javOSize&lt;/h3&gt;
-
-&lt;p&gt;去官网下载javOSize的jar包。
-http://s3.amazonaws.com/javosize/javosize-1.1.3.jar&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ps -ef | grep java
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;p&gt;拿到java进程号，之后将该文件copy到linux系统上，执行如下命令：&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo -u admin java -jar javosize-1.1.3.jar PID
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;如果执行顺利：&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$sudo&lt;/span&gt; -u admin java -jar javosize-1.1.3.jar 24539
-Welcome to javOSize v.1.1.3 :&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-We are committed to make this the best tool &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;you. Please, send us feedback or bugs to info@javosize.com. Thanks!!
-Agent has been injected &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;PID 24539
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;javOSize@JVM /]~&amp;gt; ls
-apps
-appthreads
-breakpoints
-classes
-custommetrics
-interceptor	
-jmx
-memory
-perfcounter
-problems
-repository
-scheduler
-sessions
-sh
-threads
-users
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h4 id=&quot;classes&quot;&gt;classes&lt;/h4&gt;
-
-&lt;p&gt;可以直接打开classes对class文件进行修改，比如加入日志，而不用重启服务器(v.1.1.3需要在jdk7下进行)。&lt;/p&gt;
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;classes
-vi xxx.xxx.class
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h4 id=&quot;threads&quot;&gt;threads&lt;/h4&gt;
-
-&lt;p&gt;ls后会出现一个列表如下：
-&lt;img src=&quot;/images/posts/corejava/javaOSize-thread.jpg&quot; alt=&quot;javaOSize-thread.jpg&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;如果想更详细的看某个线程，使用cat命令就可以。&lt;/p&gt;
-
-&lt;h4 id=&quot;memory&quot;&gt;memory&lt;/h4&gt;
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;javOSize@JVM /]~&amp;gt; &lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;memory
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;javOSize@JVM /memory]~&amp;gt; ls
-&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; JVM Memory &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Non-HEAP&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;MB&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; 
-    Max: 304
-    In Use: 140
-    Free: 164
-&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; JVM Memory &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;HEAP&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;MB&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-    Max: 1148
-    In Use: 395
-    Free: 753
-&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; OS RAM &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;MB&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-    Total: 2005
-    In Use: 1986
-    Free: 19
-&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; SWAP &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;MB&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-    Total: 0
-    In Use: 0
-    Free: 0
-&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; GC
-    Used &lt;span class=&quot;nb&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;%&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;: 0.02
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h4 id=&quot;problems&quot;&gt;problems&lt;/h4&gt;
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;javOSize@JVM /]~&amp;gt; &lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;problems
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;javOSize@JVM /problems]~&amp;gt; ls
-&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; Concurrency
-    Deadlocked: &lt;span class=&quot;nb&quot;&gt;false&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; Memory
-    High GC &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&amp;gt;2%&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;: &lt;span class=&quot;nb&quot;&gt;false&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;更多细节参考 http://www.javosize.com/&lt;/p&gt;
-
-&lt;h3 id=&quot;其他&quot;&gt;其他&lt;/h3&gt;
-
-&lt;h4 id=&quot;maven-helper&quot;&gt;maven helper&lt;/h4&gt;
-&lt;p&gt;分析maven依赖。&lt;/p&gt;
-
-&lt;h4 id=&quot;vm-options&quot;&gt;VM options&lt;/h4&gt;
-&lt;p&gt;类从哪里加载 -XX:+TraceClassLoading 
-输出dump文件 -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/home/admin/logs/java.hprof&lt;/p&gt;
-
-&lt;h4 id=&quot;jar包冲突&quot;&gt;jar包冲突&lt;/h4&gt;
-&lt;p&gt;打出所有依赖 mvn dependency:tree &amp;gt; ~/dependency.txt&lt;/p&gt;
-
-&lt;p&gt;只打出指定groupId和artifactId的依赖关系  mvn dependency:tree -Dverbose -Dincludes=groupId:artifactId&lt;/p&gt;
-
-&lt;h4 id=&quot;ratelimiter精细的控制qps&quot;&gt;RateLimiter(精细的控制QPS)&lt;/h4&gt;
-&lt;p&gt;参考：http://ifeve.com/guava-ratelimiter/&lt;/p&gt;
+参考 http://rednaxelafx.iteye.com/blog/1847971
 
 </description>
         <pubDate>Mon, 31 Jul 2017 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/2017/07/tools-for-production/</link>
-        <guid isPermaLink="true">http://localhost:4000/2017/07/tools-for-production/</guid>
+        <link>http://localhost:4000/2017/07/31/tools-for-production/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/07/31/tools-for-production/</guid>
         
-        <category>issue</category>
+        <category>线上问题</category>
         
+        
+        <category>线上问题</category>
         
       </item>
     
       <item>
         <title>深入理解hashmap</title>
-        <description>&lt;h3 id=&quot;一hashmap的数据结构&quot;&gt;一、hashmap的数据结构&lt;/h3&gt;
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#一hashmap的数据结构&quot; id=&quot;markdown-toc-一hashmap的数据结构&quot;&gt;一、hashmap的数据结构&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#二面试问题&quot; id=&quot;markdown-toc-二面试问题&quot;&gt;二、面试问题&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;p&gt;从下图中我们看出，hashmap具备了数组(寻址容易，插入和删除困难)和链表(寻址困难，插入和删除容易)的优点，每一个数组中都是一个链表。
-null key总是存放在Entry[]数组的第一个元素。&lt;/p&gt;
+&lt;h3 id=&quot;一hashmap的数据结构&quot;&gt;一、hashmap的数据结构&lt;/h3&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/posts/corejava/java-util-hashmap-internals.png&quot; alt=&quot;java-util-hashmap-internalcore&quot; /&gt;&lt;/p&gt;
+从下图中我们看出，hashmap具备了数组(寻址容易，插入和删除困难)和链表(寻址困难，插入和删除容易)的优点，每一个数组中都是一个链表。
+null key总是存放在Entry[]数组的第一个元素。
+
+&lt;img src=&quot;/images/posts/corejava/java-util-hashmap-internals.png&quot; alt=&quot;java-util-hashmap-internalcore&quot; /&gt;
 
 &lt;h3 id=&quot;二面试问题&quot;&gt;二、面试问题&lt;/h3&gt;
 
@@ -364,298 +291,166 @@ null key总是存放在Entry[]数组的第一个元素。&lt;/p&gt;
   &lt;li&gt;&lt;strong&gt;5、JDK8中 HashMap 和之前 HashMap 有什么不同&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;以下是答案：&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;1、16&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;cm&quot;&gt;/**
-  * The default initial capacity - MUST be a power of two.
-  */&lt;/span&gt;
- &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;DEFAULT_INITIAL_CAPACITY&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// aka 16&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;2、HashMap 在 new 后并不会立即分配数组，而是第一次put时初始化&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;构造函数只是初始化了loadFactor(哈希表的负载因子)和threshold(阈值,决定能放入的数据量，一般情况下等于 Capacity * LoadFactor)&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;cm&quot;&gt;/**
- * Constructs an empty &amp;lt;tt&amp;gt;HashMap&amp;lt;/tt&amp;gt; with the specified initial
- * capacity and load factor.
- *
- * @param  initialCapacity the initial capacity
- * @param  loadFactor      the load factor
- * @throws IllegalArgumentException if the initial capacity is negative
- *         or the load factor is nonpositive
- */&lt;/span&gt;
- &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;HashMap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;initialCapacity&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;float&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;loadFactor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;initialCapacity&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;throw&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;IllegalArgumentException&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Illegal initial capacity: &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
-                                           &lt;span class=&quot;n&quot;&gt;initialCapacity&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;initialCapacity&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MAXIMUM_CAPACITY&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;initialCapacity&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MAXIMUM_CAPACITY&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;loadFactor&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Float&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;isNaN&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;loadFactor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;throw&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;IllegalArgumentException&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Illegal load factor: &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
-                                           &lt;span class=&quot;n&quot;&gt;loadFactor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;loadFactor&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;loadFactor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;threshold&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tableSizeFor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;initialCapacity&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;这两个参数的解释如下：&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;ul&gt;
-    &lt;li&gt;Initial Capacity The capacity is the number of buckets in the hash table, The initial capacity is simply the capacity at the time the hash table is created.&lt;/li&gt;
-    &lt;li&gt;Load factor The load factor is a measure of how full the hash table is allowed to get before its capacity is automatically increased.&lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/blockquote&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;3、put的元素达到容量乘负载因子的时候，默认16*0.75&lt;/strong&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;4、HashMap的数组大小一定是2的幂，如果入参不是2的幂，实际容量会是最接近指定容量的2的幂，比如 new HashMap&amp;lt;&amp;gt;(20)，比20大且最接近的2的幂是32，实际容量就是32.值得注意的是，rehash会带来比较严重的性能损耗&lt;/strong&gt;&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cm&quot;&gt;/**
- * Rehashes the contents of this map into a new array with a
- * larger capacity.  This method is called automatically when the
- * number of keys in this map reaches its threshold.
- *
- * If current capacity is MAXIMUM_CAPACITY, this method does not
- * resize the map, but sets threshold to Integer.MAX_VALUE.
- * This has the effect of preventing future calls.
- *
- * @param newCapacity the new capacity, MUST be a power of two;
- *        must be greater than current capacity unless current
- *        capacity is MAXIMUM_CAPACITY (in which case value
- *        is irrelevant).
- */&lt;/span&gt;
- &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;resize&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;newCapacity&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;Entry&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;oldTable&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;table&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;oldCapacity&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;oldTable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;oldCapacity&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MAXIMUM_CAPACITY&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;threshold&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Integer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;MAX_VALUE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;n&quot;&gt;Entry&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;newTable&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Entry&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;newCapacity&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;];&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;transfer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;newTable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;initHashSeedAsNeeded&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;newCapacity&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;table&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;newTable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;threshold&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Math&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;min&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;newCapacity&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;loadFactor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MAXIMUM_CAPACITY&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;5、JDK8处于提升性能的考虑，在哈希碰撞的链表长度达到TREEIFY_THRESHOLD（默认8)后，会把该链表转变成树结构。另外，在 resize 的时候，通过巧妙的设计，减少了 rehash 的性能消耗。
-具体参考：&lt;a href=&quot;http://www.importnew.com/14417.html&quot;&gt;http://www.importnew.com/14417.html&lt;/a&gt;&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;三hashmap并发死循环问题&quot;&gt;三、HashMap并发死循环问题&lt;/h3&gt;
-&lt;p&gt;具体参考：&lt;a href=&quot;http://coolshell.cn/articles/9606.html&quot;&gt;http://coolshell.cn/articles/9606.html&lt;/a&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;四记一次hashmap的infinite-loop问题&quot;&gt;四、记一次hashmap的Infinite Loop问题&lt;/h3&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;top
-
-top - 14:06:23 up 70 days, 16:44,  2 users,  load average: 5.25, 5.32, 5.35
-Tasks: 206 total,   1 running, 205 sleeping,   0 stopped,   0 zombie
-Cpu&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;s&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;:  75.9%us,0.0%st
-
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;p&gt;首先查看%st(Steal time)，Steal 值比较高的话，服务器上的另一个虚拟机可能拥有更大更多的 CPU 时间片，你可能需要申请升级以与之竞争。另外，高steal值可能意味着主机供应商在服务器上过量地出售虚拟机。&lt;/p&gt;
-
-&lt;p&gt;%us — 用户空间占用CPU的百分比。%us高说明，主要是自身应用的消耗。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/posts/corejava/hashmap-top.png&quot; alt=&quot;hashmap-top.png&quot; /&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ps -mp 16384 -o THREAD,tid,time 或者 top -Hp pid
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;列出pid包含的所有线程信息及本地线程ID (tid),找到最耗时的线程：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/posts/corejava/hashmap-thread.png&quot; alt=&quot;hashmap-thread.png&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;将需要的线程ID转换为16进制格式&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;printf&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;%x&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; tid
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;jstack 16384|grep 7ea3 -A 30
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/posts/corejava/hashmap-thread-detail.png&quot; alt=&quot;hashmap-thread-detail.png&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;查看线程执行情况，程序经常占了100%的CPU，查看堆栈，你会发现程序都Hang在了HashMap.get()这个方法上了&lt;/p&gt;
-
 </description>
         <pubDate>Fri, 14 Jul 2017 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/2017/07/go-deep-into-hashmap/</link>
-        <guid isPermaLink="true">http://localhost:4000/2017/07/go-deep-into-hashmap/</guid>
+        <link>http://localhost:4000/2017/07/14/go-deep-into-hashmap/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/07/14/go-deep-into-hashmap/</guid>
         
         <category>core java</category>
         
+        
+        <category>java</category>
         
       </item>
     
       <item>
         <title>jekyll安装及配置</title>
-        <description>&lt;p&gt;参考主页：http://jekyll.com.cn/&lt;/p&gt;
+        <description>参考主页：http://jekyll.com.cn/
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;gem install jekyll
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;ERROR:  Error installing jekyll:
-liquid requires Ruby version &amp;gt;= 2.1.0.&lt;/p&gt;
+ERROR:  Error installing jekyll:
+liquid requires Ruby version &amp;gt;= 2.1.0.
 
-&lt;p&gt;查看ruby版本&lt;/p&gt;
+查看ruby版本
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;ruby —version&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;p&gt;ruby 2.0.0p648 (2015-12-16 revision 53162) [universal.x86_64-darwin16]&lt;/p&gt;
+ruby 2.0.0p648 (2015-12-16 revision 53162) [universal.x86_64-darwin16]
 
-&lt;p&gt;升级ruby&lt;/p&gt;
+升级ruby
 
-&lt;p&gt;使用RVM也就是Ruby Version Manager,Ruby版本管理器来升级ruby，RVM包含了Ruby的版本管理和Gem库管理(gemset)。&lt;/p&gt;
+使用RVM也就是Ruby Version Manager,Ruby版本管理器来升级ruby，RVM包含了Ruby的版本管理和Gem库管理(gemset)。
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;curl -L get.rvm.io | bash -s stable
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;会在~/.profile文件中配置环境变量&lt;/p&gt;
+会在~/.profile文件中配置环境变量
 
-&lt;p&gt;Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH=”$PATH:$HOME/.rvm/bin”&lt;/p&gt;
+Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH=”$PATH:$HOME/.rvm/bin”
 
-&lt;p&gt;[[ -s “$HOME/.rvm/scripts/rvm” ]] &amp;amp;&amp;amp; source “$HOME/.rvm/scripts/rvm” # Load RVM into a shell 	session &lt;em&gt;as a function&lt;/em&gt;&lt;/p&gt;
+[[ -s “$HOME/.rvm/scripts/rvm” ]] &amp;amp;&amp;amp; source “$HOME/.rvm/scripts/rvm” # Load RVM into a shell 	session &lt;em&gt;as a function&lt;/em&gt;
 
-&lt;p&gt;测试是否安装正常&lt;/p&gt;
+测试是否安装正常
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;rvm -v
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;rvm 1.29.2 (latest) by Michal Papis, Piotr Kuczynski, Wayne E. Seguin [https://rvm.io/]&lt;/p&gt;
+rvm 1.29.2 (latest) by Michal Papis, Piotr Kuczynski, Wayne E. Seguin [https://rvm.io/]
 
-&lt;p&gt;列出已知ruby的版本&lt;/p&gt;
+列出已知ruby的版本
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;rvm list known
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;安装ruby2.4.1&lt;/p&gt;
+安装ruby2.4.1
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;rvm install ruby-2.4.1
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;中间报错：&lt;/p&gt;
+中间报错：
 
-&lt;p&gt;and make sure brew update works before continuing.\n’
+and make sure brew update works before continuing.\n’
 Failed to update Homebrew, follow instructions here:
-https://github.com/Homebrew/homebrew/wiki/Common-Issues&lt;/p&gt;
+https://github.com/Homebrew/homebrew/wiki/Common-Issues
 
-&lt;p&gt;重新安装homebrew(官网：https://brew.sh/index_zh-cn.html)&lt;/p&gt;
+重新安装homebrew(官网：https://brew.sh/index_zh-cn.html)
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;Fatal: unable to access ‘https://github.com/Homebrew/brew/’: Failed to connect to github.com 	port 443: Operation timed out
-Failed during: git fetch origin master:refs/remotes/origin/master –tags –force –depth=1&lt;/p&gt;
+Fatal: unable to access ‘https://github.com/Homebrew/brew/’: Failed to connect to github.com 	port 443: Operation timed out
+Failed during: git fetch origin master:refs/remotes/origin/master –tags –force –depth=1
 
-&lt;p&gt;发现是由于绑定了host所致。。。解除绑定安装成功：&lt;/p&gt;
+发现是由于绑定了host所致。。。解除绑定安装成功：
 
-&lt;p&gt;==&amp;gt; Cleaning up /Library/Caches/Homebrew…&lt;/p&gt;
+==&amp;gt; Cleaning up /Library/Caches/Homebrew…
 
-&lt;p&gt;==&amp;gt; Migrating /Library/Caches/Homebrew to /Users/Ian/Library/Caches/Homebrew…&lt;/p&gt;
+==&amp;gt; Migrating /Library/Caches/Homebrew to /Users/Ian/Library/Caches/Homebrew…
 
-&lt;p&gt;==&amp;gt; Deleting /Library/Caches/Homebrew…&lt;/p&gt;
+==&amp;gt; Deleting /Library/Caches/Homebrew…
 
-&lt;p&gt;Already up-to-date.&lt;/p&gt;
+Already up-to-date.
 
-&lt;p&gt;==&amp;gt; Installation successful!&lt;/p&gt;
+==&amp;gt; Installation successful!
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;rvm install ruby-2.4.1
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;Install of ruby-2.4.1 - #complete
-Ruby was built without documentation, to build it run: rvm docs generate-ri&lt;/p&gt;
+Install of ruby-2.4.1 - #complete
+Ruby was built without documentation, to build it run: rvm docs generate-ri
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;gem install jekyll
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;Done installing documentation for public_suffix, addressable, colorator, sass, jekyll-sass-		converter, rb-fsevent, ffi, rb-inotify, listen, jekyll-watch, kramdown, liquid, mercenary, 		forwardable-extended, pathutil, rouge, safe_yaml, jekyll after 32 seconds 18 gems installed&lt;/p&gt;
+Done installing documentation for public_suffix, addressable, colorator, sass, jekyll-sass-		converter, rb-fsevent, ffi, rb-inotify, listen, jekyll-watch, kramdown, liquid, mercenary, 		forwardable-extended, pathutil, rouge, safe_yaml, jekyll after 32 seconds 18 gems installed
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;jekyll
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;/Users/Ian/.rvm/rubies/ruby-			 2.4.1/lib/ruby/site_ruby/2.4.0/rubygems/core_ext/kernel_require.rb:55:in require: cannot load such file – bundler (LoadError)&lt;/p&gt;
+/Users/Ian/.rvm/rubies/ruby-			 2.4.1/lib/ruby/site_ruby/2.4.0/rubygems/core_ext/kernel_require.rb:55:in require: cannot load such file – bundler (LoadError)
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;gem install bundler
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;one installing documentation for bundler after 4 seconds
-1 gem installed&lt;/p&gt;
+one installing documentation for bundler after 4 seconds
+1 gem installed
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;jekyll
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;Could not find proper version of jekyll (3.1.1) in any of the sources
-Run bundle install to install missing gems.&lt;/p&gt;
+Could not find proper version of jekyll (3.1.1) in any of the sources
+Run bundle install to install missing gems.
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;bundle install
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;Bundle complete! 3 Gemfile dependencies, 17 gems now installed.
-Use “bundle info [gemname]” to see where a bundled gem is installed.&lt;/p&gt;
+Bundle complete! 3 Gemfile dependencies, 17 gems now installed.
+Use “bundle info [gemname]” to see where a bundled gem is installed.
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;jekyll server
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;Configuration file: /Users/Ian/jekyll-blog/_config.yml
+Configuration file: /Users/Ian/jekyll-blog/_config.yml
 Dependency Error: Yikes! It looks like you don’t have jekyll-sitemap or one of its dependencies installed. In order to use Jekyll as currently configured, you’ll need to install this gem. The full error message from Ruby is: ‘cannot load such file – jekyll-sitemap’ If you run into trouble, you can find helpful resources at http://jekyllrb.com/help/!
-jekyll 3.1.1 | Error:  jekyll-sitemap&lt;/p&gt;
+jekyll 3.1.1 | Error:  jekyll-sitemap
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;bundle update jekyll
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;Using jekyll 3.5.0 (was 3.1.1)
-Bundle updated!&lt;/p&gt;
+Using jekyll 3.5.0 (was 3.1.1)
+Bundle updated!
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;jekyll server
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;Configuration file: /Users/Ian/jekyll-blog/_config.yml
+Configuration file: /Users/Ian/jekyll-blog/_config.yml
        Deprecation: The ‘gems’ configuration option has been renamed to ‘plugins’. Please update your config file accordingly.
-Dependency Error: Yikes! It looks like you don’t have jekyll-sitemap or one of its dependencies installed. In order to use Jekyll as currently configured, you’ll need to install this gem. The full error message from Ruby is: ‘cannot load such file – jekyll-sitemap’ If you run into trouble, you can find helpful resources at https://jekyllrb.com/help/!&lt;/p&gt;
+Dependency Error: Yikes! It looks like you don’t have jekyll-sitemap or one of its dependencies installed. In order to use Jekyll as currently configured, you’ll need to install this gem. The full error message from Ruby is: ‘cannot load such file – jekyll-sitemap’ If you run into trouble, you can find helpful resources at https://jekyllrb.com/help/!
 
-&lt;p&gt;修改_config.yml，去掉jekyll-sitemap&lt;/p&gt;
+修改_config.yml，去掉jekyll-sitemap
 </description>
         <pubDate>Thu, 13 Jul 2017 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/2017/07/jekyll-install-conf/</link>
-        <guid isPermaLink="true">http://localhost:4000/2017/07/jekyll-install-conf/</guid>
+        <link>http://localhost:4000/2017/07/13/jekyll-install-conf/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/07/13/jekyll-install-conf/</guid>
         
         <category>jekyll</category>
         
@@ -705,9 +500,175 @@ Dependency Error: Yikes! It looks like you don’t have jekyll-sitemap or one of
 
 </description>
         <pubDate>Thu, 13 Jul 2017 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/2017/07/css/</link>
-        <guid isPermaLink="true">http://localhost:4000/2017/07/css/</guid>
+        <link>http://localhost:4000/2017/07/13/css/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/07/13/css/</guid>
         
+        
+      </item>
+    
+      <item>
+        <title>前端如何写一个精确的倒计时</title>
+        <description>
+关于写倒计时大家可能都都比较熟悉，使用 setTimeout 或 setInterval 就可以搞定。几秒钟或者几分钟的倒计时这样写没有问题，但是如果是长时间的倒计时，这样写就会不准确。如果用户修改了他的设备时间，这样的倒计时就没有意义了。今天就说说写一个精确的倒计时的方法。
+
+&lt;img src=&quot;https://img.alicdn.com/tfs/TB18QnlOpXXXXcVXpXXXXXXXXXX-388-256.png&quot; alt=&quot;&quot; /&gt;
+
+</description>
+        <pubDate>Fri, 25 Nov 2016 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2016/11/25/how-to-write-a-count-down/</link>
+        <guid isPermaLink="true">http://localhost:4000/2016/11/25/how-to-write-a-count-down/</guid>
+        
+        <category>countdown</category>
+        
+        <category>JavaScript</category>
+        
+        
+        <category>JavaScript</category>
+        
+      </item>
+    
+      <item>
+        <title>使用 JavaScript 创建并下载文件</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#先上代码&quot; id=&quot;markdown-toc-先上代码&quot;&gt;先上代码&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+本文将介绍如何使用 JavaScript 创建文件，并自动/手动将文件下载。这在导出原始数据时会比较方便。
+
+&lt;h2 id=&quot;先上代码&quot;&gt;先上代码&lt;/h2&gt;
+
+&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cm&quot;&gt;/**
+ * 创建并下载文件
+ * @param  {String} fileName 文件名
+ * @param  {String} content  文件内容
+ */&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;createAndDownloadFile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;fileName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;content&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;aTag&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;createElement&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'a'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;blob&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Blob&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;content&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;aTag&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;download&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;fileName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;aTag&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;href&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;URL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;createObjectURL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;blob&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;aTag&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;click&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;URL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;revokeObjectURL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;blob&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+很简单对吧，直接调用这个方法，传入文件名和文件内容，程序新建 a 标签，新建 Blob 对象，将文件名赋给 a 标签，同时将 Blob 对象作为 Url 也赋给 a 标签，模拟点击事件，自动下载成功，最后再回收内存。下面我们来看看具体是怎么操作的。
+
+</description>
+        <pubDate>Tue, 22 Nov 2016 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2016/11/22/js-create-file-and-download/</link>
+        <guid isPermaLink="true">http://localhost:4000/2016/11/22/js-create-file-and-download/</guid>
+        
+        <category>文件</category>
+        
+        <category>下载</category>
+        
+        <category>JavaScript</category>
+        
+        
+        <category>JavaScript</category>
+        
+      </item>
+    
+      <item>
+        <title>Fisher–Yates shuffle 洗牌算法</title>
+        <description>
+简单来说 Fisher–Yates shuffle 算法是一个用来将一个有限集合生成一个随机排列的算法（数组随机排序）。这个算法生成的随机排列是等概率的。同时这个算法非常高效。
+
+本文主要介绍这个算法的来源、演变、原理。并举出一个例子为大家清晰的描述每次迭代过程。最后使用 JavaScript 代码将算法实现。
+
+&lt;img src=&quot;https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Riffle_shuffle.jpg/320px-Riffle_shuffle.jpg&quot; alt=&quot;&quot; /&gt;
+
+</description>
+        <pubDate>Sun, 16 Oct 2016 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2016/10/16/shuffle-algorithm/</link>
+        <guid isPermaLink="true">http://localhost:4000/2016/10/16/shuffle-algorithm/</guid>
+        
+        <category>算法</category>
+        
+        <category>shuffle</category>
+        
+        <category>乱序</category>
+        
+        <category>洗牌</category>
+        
+        
+        <category>JavaScript</category>
+        
+      </item>
+    
+      <item>
+        <title>Git 如何 clone 非 master 分支的代码</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#问题描述&quot; id=&quot;markdown-toc-问题描述&quot;&gt;问题描述&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;问题描述&quot;&gt;问题描述&lt;/h2&gt;
+
+我们每次使用命令
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git clone git@gitlab.xxx.com:xxxxx.git
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+默认 clone 的是这个仓库的 master 分支。如果最新的代码不在 master 分支上，该如何拿到呢？如下图所示，最新的代码可能在&lt;code class=&quot;highlighter-rouge&quot;&gt;daily/1.4.1&lt;/code&gt;分支上，我们希望拿到这个分支上的代码。
+
+</description>
+        <pubDate>Thu, 07 Jul 2016 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2016/07/07/git-clone-not-master-branch/</link>
+        <guid isPermaLink="true">http://localhost:4000/2016/07/07/git-clone-not-master-branch/</guid>
+        
+        <category>Git</category>
+        
+        <category>GitHub</category>
+        
+        <category>分支</category>
+        
+        
+        <category>GitHub</category>
+        
+      </item>
+    
+      <item>
+        <title>如何使用 babel</title>
+        <description>
+&lt;a href=&quot;https://babeljs.io/&quot;&gt;Babel&lt;/a&gt; 用于将 ES6 的代码转化为 ES5，使得 ES6 可以在目前的浏览器环境下使用。学习使用 babel 是为了使用 ES2015 做准备。本文将介绍如何使用 babel，以及一些相关的配置。
+
+</description>
+        <pubDate>Tue, 14 Jun 2016 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2016/06/14/how-to-use-babel/</link>
+        <guid isPermaLink="true">http://localhost:4000/2016/06/14/how-to-use-babel/</guid>
+        
+        <category>ES2015</category>
+        
+        <category>ES6</category>
+        
+        <category>ES5</category>
+        
+        <category>babel</category>
+        
+        
+        <category>JavaScript</category>
+        
+      </item>
+    
+      <item>
+        <title>JavaScript 语言精粹笔记3-方法、毒瘤等</title>
+        <description>
+记录一下阅读蝴蝶书的笔记，本篇为书中最后一部分：方法、代码风格、优美的特性、毒瘤、糟粕等。
+
+</description>
+        <pubDate>Fri, 10 Jun 2016 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2016/06/10/JavaScript-good-parts-note3/</link>
+        <guid isPermaLink="true">http://localhost:4000/2016/06/10/JavaScript-good-parts-note3/</guid>
+        
+        <category>函数</category>
+        
+        <category>JavaScript</category>
+        
+        
+        <category>JavaScript</category>
         
       </item>
     

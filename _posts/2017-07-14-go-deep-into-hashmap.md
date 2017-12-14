@@ -3,7 +3,13 @@ title: 深入理解hashmap
 published: true
 layout: post
 tag: core java
+categories: java
+date: 2017-07-14
+author: 恩来小平
 ---
+
+* content
+{:toc}
 
 ### 一、hashmap的数据结构
 
