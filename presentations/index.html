@@ -1,0 +1,587 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=1024" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>Java Concurrency</title>
+
+    <link href="./index.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Encode+Sans|Share+Tech+Mono" rel="stylesheet">
+  </head>
+  <body class="impress-not-supported">
+    <div id="particle-canvas"></div>
+
+    <div class="fallback-message">
+        <p>Your browser <b>doesn't support the features required</b></p>
+    </div>
+
+
+    <div id="impress">
+
+      
+
+      <div id="Title" class="step press my-step1" data-x="-1000" data-y="-200000" data-scale="100">
+        <div class="title tech">多线程深度历险</div>
+        <div class="subtitle sans">从案例到原理</div>
+        <!--<p>(or something close to that)</p>-->
+        <div style="padding-top:100px"></div>
+        <p>Presentation by 蒋恩平</p>
+        <p>November 2018</p>
+      </div>
+
+
+      <div class="step press my-step2" data-x="10000" data-y="-50000" data-scale="110" data-rotate="90">
+        <div class="subtitle sans" style="font-size: 70px">基础知识</div>
+      </div>
+
+      <div class="step press my-step3" data-x="90000" data-y="-15000" data-scale="110" data-rotate="90">
+        <div class="subtitle tech">Process VS Thread</div>
+        <div style="padding-top:20px"></div>
+        <img src="img/process-thread.png" width="800" />
+        <p style="text-align: left;padding-left: 18px;padding-bottom: 30px;font-size: 40">进程:操作系统的管理单位,系统分配资源的基本单位</p>
+        <p style="text-align: left;padding-left: 18px;font-size: 40">线程:进程的管理单位,调度CPU的基本单位,每个线程共享堆空间，拥有自己独立的栈空间。</p>
+      </div>
+
+
+      <div class="step press my-step4" data-x="90000" data-y="-30000" data-scale="1" data-rotate="90">
+        <p> 任务的状态保存及再加载<br>这段过程就叫做<span style="color:#ffb84b;">上下文切换</span></p>
+        <img width="1000px" src="./img/thread-context-switch.png" style="margin-left: -300">
+      </div>
+
+
+      <div class="step press my-step5" data-x="90000" data-y="-27500" data-scale="1" data-rotate="90" style="text-align: left;width: 1200">
+        <div class="subtitle sans" style="font-size: 65">
+          <span style="color:#ff6363;">上下文切换</span> 就是这样一个过程，允许CPU记录并恢复各种正在运行程序的状态，使它能够完成切换操作。
+        </div>
+      </div>
+
+
+
+      <div class="step press my-step6" data-x="18000" data-y="-1500" data-scale="1" data-rotate="90" style="width: 1200">
+        <div class="subtitle tech" style="font-size: 65px">Thread Context Switch</div>
+        <div style="padding-top:20px"></div>
+        <div class="subtitle sans" style="translateY(50px);">
+           <i style="font-size: 55px;color:#ff6363;">减少上下文切换</i>
+         </div>
+        <div style="padding-top:20px"></div>
+        <p style="text-align: left;font-size: 55px">减少锁的使用</p>
+        <p style="text-align: left;padding-left: 55px;font-size: 55px"> - 多线程竞争锁时会引起上下文切换</p>
+        <div style="padding-top:20px"></div>
+        <p style="text-align: left;font-size: 50px">避免创建不需要的线程</p>
+        <p style="text-align: left;padding-left: 55px;font-size: 55px"> - 比如任务很少,但是创建了很多线程来处理</p>
+        <p style="text-align: left;padding-left: 55px;font-size: 55px"> - 大量线程处于等待状态</p>
+      </div>
+
+
+      <div class="step press my-step7" data-x="18000000" data-y="-10000" rotate="-90" data-scale="100">
+        <div class="subtitle tech" style="font-size: 65px;width: 1700;margin-left: -400">Thread Safe</div>
+        <div style="padding-top:20px;width: 1500"></div>
+        <img src="img/simpleFormat.png" style="width: 1300;margin-left: -200" />
+      </div>
+
+      <div class="step press my-step8" data-x="-100000" data-y="-1500" rotate="-90" data-scale="100" data-rotate-y="60">
+        <div class="subtitle tech" style="font-size: 65px">Thread Safe</div>
+        <div style="padding-top:20px"></div>
+        <img src="img/simpleFormat-result.png" style="width: 1500;margin-left: -300" />
+      </div>
+
+      <div class="step press my-step9" data-x="250000" data-y="85000" rotate="-90" data-scale="100" data-rotate-y="90">
+        <div class="subtitle tech" style="font-size: 65px">Thread Safe</div>
+        <div style="padding-top:20px"></div>
+        <img src="img/calendar.png" style="margin-left: -150px;style="width: 1400;" />
+      </div>
+
+      <div class="step press my-step10" data-x="520000" data-y="185000" rotate="-90" data-scale="100" data-rotate-y="120">
+       <div class="subtitle tech" style="font-size: 50px">CPU的高速缓存</div>
+        <img src="img/volatile.png" style="width: 900;margin-left: -200" />
+      </div>
+
+
+      <div class="step press my-step10.1" data-x="350000" data-y="185000" rotate="-90" data-scale="100" data-rotate-y="130" style="size: 1500">
+       <div class="subtitle tech" style="font-size: 45px">JMM</div>
+        <span style="size: 1500 font-size:45px">拷贝到工作内存 ->  工作内存修改 -> 更新变量到主内存</span>
+        <div style="padding-top:20px"></div>
+        <img src="img/jmm.png" style="width: 800;margin-left: -100" />
+      </div>
+
+
+      <div class="step press my-step11" data-x="600000" data-y="-1500" rotate="-90" data-scale="100" data-rotate-y="150" style="width: 1500">
+        <div class="subtitle tech" style="font-size: 65px">volatile语义</div>
+        <div style="padding-top:20px"></div>
+        <div class="subtitle sans" style="translateY(50px);">
+           <i style="font-size: 55px;color:#ff6363;">每个线程获取最新写入的值</i>
+         </div>
+        <div style="padding-top:55px"></div>
+        <p style="text-align: left;font-size: 55px">当某个线程对volatile变量进行修改后，会立即将修改后的新值刷回主存，保证主存中永远都是最新的数据。</p>
+        <div style="padding-top:20px"></div>
+        <p style="text-align: left;font-size: 55px">CPU会将本地缓存设置为无效,从主内存获取。</p>
+        
+      </div>
+
+      <div class="step press my-step12" data-x="900000" data-y="-150000" data-rotate="90" data-scale="180" style="width: 1500">
+        <div class="subtitle tech" style="font-size: 65px;width:1000px;margin-left: 240px">volatile is thread safe?</div>
+        <div style="padding-top:20px"></div>
+        <img src="img/volatile-not-safe.png" style="width: 800px" />
+      </div>
+
+
+      <div class="step press my-step13" data-x="1010000" data-y="-170000" data-rotate="180" data-scale="90" style="width: 1500">
+        <div class="subtitle tech" style="font-size: 55px">volatile语义</div>
+        <div style="padding-top:20px"></div>
+        <i style="font-size: 50px;color:#ff6363;">volatile is not thread safe</i>
+        <div style="padding-top:50px"></div>
+        <p style="text-align: left;font-size: 45;">运行结果: count=<span style="color: #ff6363">982</span></p>
+        <p style="text-align: left;font-size: 45;">运行结果: count=<span style="color: #ff6363">984</span></p>
+        <p style="text-align: left;font-size: 45;">运行结果: count=<span style="color: #ff6363">974</span></p>
+        <div style="padding-top:20px"></div>
+        <p style="text-align: left;font-size: 45">可见性：对一个volatile变量的读，总是能看到(任意线程)对这个volatile变量最后的写入。</p>
+        <div style="padding-top:20px"></div>
+         <p style="text-align: left;font-size: 45">原子性：对任意单个volatile变量的读写具有原子性，但类似于volatile++这种复合操作不具有原子性。</p>
+      </div>
+
+
+      <div class="step press my-step14" data-x="1600000" data-y="-25000" data-rotate="60" data-scale="100" style="width: 1500">
+        <div class="subtitle tech" style="font-size: 50px;width: 1000;margin-left: 220">volatile非线程安全问题分析</div>
+        <i style="font-size: 50px;color:#ff6363;">i++是原子操作么？</i>
+        <p>javap -c Counter</p>
+        <img src="img/volatile-analyze.png" style="width: 800"/>
+      </div>
+
+    
+      <div class="step press my-step15" data-x="480000" data-y="-250000" data-scale="110" data-rotate="90">
+        <div class="subtitle tech" style="font-size: 65px">i++</div>
+        <i style="font-size: 55px;color:#ff6363;">读-改-写</i>
+        <div style="padding-top:50px"></div>
+        <p style="text-align: left;font-size: 55px">getstatic     获取静态变量</p>
+        <div style="padding-top:20px"></div>
+        <p style="text-align: left;font-size: 55px">iconst_1      将int型1推送到栈顶</p>
+        <div style="padding-top:20px"></div>
+        <p style="text-align: left;font-size: 55px">iadd            求和</p>
+        <div style="padding-top:20px"></div>
+        <p style="text-align: left;font-size: 55px">Putstatic      写变量</p>
+      </div>
+
+
+      <div class="step press my-step16" data-x="3000000" data-y="-115000" data-z="-100" data-scale="1" data-rotate="90" style="width: 1500">
+        <div class="subtitle tech" style="font-size:55px;width: 1000;margin-left: 180">线程安全</div>
+        <img src="img/thread-safe-define.png" style="width: 600"/>
+        <p style="text-align: left;font-size: 45px"><span style="color:#ff6363;">线程安全问题</span>是指当多个线程同时读写一个状态变量并且没有任何同步措施的时候，导致脏数据或者其他不可预见的结果的问题</p>
+      </div>
+
+
+      <div class="step press my-step17" data-x="500000" data-y="-50000" data-z="-100" data-scale="1" data-rotate="90">
+        <div class="subtitle sans" style="font-size: 70px">案例分析</div>
+      </div>
+
+      <div class="step press my-step18" data-x="550000" data-y="-50000" data-z="-100" data-scale="1" data-rotate="90" >
+        <div class="subtitle tech" style="font-size: 65px;width: 1200;margin-left: -200;">
+          并发度高的方法中直接起线程/线程池
+        </div>
+        <div style="padding-top:20px;"></div>
+        <img style="margin-left: -200;" src="./img/makeThreadInMethod.png" style="width: 900" />
+      </div>
+
+      <div class="step press my-step19" data-x="180000" data-y="-1500" rotate="-90" data-scale="100">
+        <div class="subtitle tech" style="font-size: 65px">线程导致OOM</div>
+        <div class="subtitle sans">
+          <span style="color:#4bff84;">1000TPS</span> 几秒内线程<span style="color:#ff6565;">OOM</span>
+        </div>
+        <div style="padding-top:20px"></div>
+        <img src="img/threadOOM.png" width="1200" style="margin-left: -100" style="width: 2800px"/>
+      </div>
+
+      <div class="step press my-step20" data-x="720000" data-y="-115000" rotate="-90" data-scale="100" data-rotate-y="60">
+        <div class="subtitle tech" style="font-size: 65px;width: 1000;margin-left: -80">线程耗尽</div>
+        <i style="font-size: 50px;color:#ff6363; size: 1800px">new Thread().start() -> start0() -> JVM_StartThread(jvm.cpp)</i>
+        <div style="padding-top:20px"></div>
+        <img src="img/osThread.png" style="margin-left:-300;width: 1400px"/>
+      </div>
+
+      <div class="step press 21" data-x="820000" data-y="-300000" rotate="-90" data-scale="100" data-rotate-y="90">
+        <div class="subtitle tech" style="font-size: 55px;width: 1200;text-align: left">高并发方法中直接起线程/线程池</div>
+        <div style="padding-top:20px"></div>
+        <p style="text-align: left;font-size: 50px;color:#ff6363;">威力</p>
+        <p style="text-align: left;padding-left: 50px;font-size: 45px;width: 1100"> - 在机器线程数暴增时，造成系统不可用</p>
+        <div style="padding-top:20px"></div>
+        <p style="text-align: left;font-size: 50px;color:#ff6363;">问题定位</p>
+        <p style="text-align: left;padding-left: 50px;font-size: 45px;width: 1100"> - 服务不可用,dump线程后发现线程量巨大</p>
+        <div style="padding-top:20px"></div>
+        <p style="text-align: left;font-size: 50px;color:#ff6363;">细节分析</p>
+        <p style="text-align: left;padding-left: 50px;font-size: 45px;width: 1150"> - 方法中线程/线程池执行完后会被回收低并发状态没问题</p>
+        <p style="text-align: left;padding-left: 50px;font-size: 45px;width: 1100"> - 生产环境中，该方法被调用并发程度高,会造成线程数不可控</p>
+      </div>
+
+
+      <div class="step press 22" data-x="1649000" data-y="85000" rotate="-90" data-scale="100" data-rotate-y="120">
+        <div class="subtitle tech" style="font-size: 65px;width: 1200">
+          <span style="margin-left: -800">-Xss参数和线程数</span>
+        </div>
+        <div style="padding-top:20px"></div>
+        
+        <p style="text-align: left;font-size: 50px;width: 1200">在相同物理内存下，减小这个值能生成更多线程</p>
+        <div style="padding-top:20px"></div>
+        <p style="text-align: left;font-size: 50px;color:#ff6363;width: 1200">操作系统对一个进程内的线程数是有限制的,不能无限生成</p>
+      </div>
+
+
+      <div class="step press 23" data-x="2000000" data-y="185000" rotate="-90" data-scale="100" data-rotate-y="150" style="width: 1500">
+        <div class="subtitle tech" style="font-size: 65px;">
+          <span style="padding-left: -10">-Xss参数和线程数</span>
+        </div>
+        <div style="padding-top:20px"></div>
+        <p style="font-size: 55px;text-align: left;margin-left: 350;">Linux/ARM (32-bit): 320 KB</p>
+        <div style="padding-top:20px"></div>
+        <p style="font-size: 55px;text-align: left;margin-left: 350">Linux/x64 (64-bit): 
+          <span style="color:#4bff84;">1024 KB</span>
+        </p>
+        <div style="padding-top:20px"></div>
+        <p style="font-size: 55px;text-align: left;margin-left: 350">OS X (64-bit): 
+          <span style="color:#4bff84;">1024 KB</span>
+        </p>
+        <div style="padding-top:20px"></div>
+        <p style="font-size: 55px;text-align: left;margin-left: 350">Oracle Solaris/i386 (32-bit): 320 KB</p>
+        <div style="padding-top:20px"></div>
+        <p style="font-size: 55px;text-align: left;margin-left: 350">Oracle Solaris/x64 (64-bit): 
+          <span style="color:#4bff84;">1024 KB</span>
+        </p>
+      </div>
+
+
+      <div class="step press 24" data-x="2000000" data-y="-1500" rotate="-90" data-scale="100">
+        <div class="subtitle tech" style="font-size: 65px;width: 1900;margin-left: -550">任务超时和线程池的抛弃策略</div>
+        <div style="padding-top:10px"></div>
+        <img src="img/future-discard.png" style="margin-left: -300" width="1500" />
+      </div>
+
+      <div class="step press 25" data-x="2000000" data-y="-305000" data-rotate="90" data-scale="180">
+        <div class="subtitle tech" style="font-size: 65px;width: 1900;margin-left: -500">任务超时和线程池的抛弃策略</div>
+        <div style="padding-top:20px"></div>
+        <img src="img/missingFutureTask.png" style="margin-left: -50" width="1200" />
+      </div>
+
+
+      <div class="step press 26" data-x="2000000" data-y="-705000" data-rotate="180" data-scale="90">
+        <div class="subtitle tech" style="font-size: 65px;width: 1300;text-align: left">任务超时和线程池的抛弃策略</div>
+        <div style="padding-top:20px"></div>
+        <div style="padding-top:20px"></div>
+        <p style="text-align: left;font-size: 55px;color:#ff6363;">细节分析</p>
+        <p style="text-align: left;padding-left: 55px;font-size: 45px;width: 1100">当callable提交给线程池后，在future.get()方法未加超时参数时，被线程池丢弃的callable的future是永远无法返回的,造成无限等待状态。
+        </p>
+        <div style="padding-top:20px"></div>
+        <p style="text-align: left;font-size: 55px;color:#ff6363;">DiscardOldestPolicy</p>
+        <p style="text-align: left;padding-left: 55px;font-size: 45px;width: 1100">当任务添加到线程池中被拒绝时，线程池会放弃等待队列中最旧的未处理任务，然后将被拒绝的任务添加到等待队列中。</p>
+      </div>
+
+      <div class="step press 27" data-x="200000" data-y="-705000" data-rotate="60" data-scale="100">
+        <div class="subtitle tech" style="font-size: 65px;width: 1000">过程分析 </div>
+        <div style="padding-top:10px"></div>
+        <p style="text-align: left;padding-left: 0px;font-size: 40px;width: 1100">
+          1、线程池core和max都是1,只有一个线程在工作,线程等待队列为1
+        </p>
+        <div style="padding-top:10px"></div>
+        <p style="text-align: left;padding-left: 0px;font-size: 40px;width: 1100">
+          2、先提交任务一给线程池,任务一耗时长(sleep 5秒)
+        </p>
+        <div style="padding-top:10px"></div>
+        <p style="text-align: left;padding-left: 0px;font-size: 40px;width: 1100">
+          3、任务一在线程池中处理时,提交任务二给线程池,被放入等待队列
+        </p>
+        <div style="padding-top:10px"></div>
+        <p style="text-align: left;padding-left: 0px;font-size: 40px;width: 1000">
+          4、提交任务三给线程池，由于discardOldest策略，任务二被丢弃，改为执行任务三
+        </p>
+        <div style="padding-top:10px"></div>
+        <p style="text-align: left;padding-left: 0px;font-size: 40px;width: 1000">
+        5、任务一、二、三 提交给线程池后，任务一的future可正常获取结果，任务二future由于提交的callable被丢弃，若future.get未加超时时间，则无限等待,线程会一直阻塞
+        </p>
+      </div>
+
+
+      <div class="step press 28" data-x="1000000" data-y="-25000" data-rotate="75" data-scale="200">
+        <div class="subtitle tech" style="font-size: 65px;width: 1200;margin-left: -200">小结</div>
+        <div style="padding-top:20px"></div>
+        <p style="text-align: left;font-size: 50px;color:#ff6363;width: 1200;">
+            使用future.get()方法时，必须指定好超时参数。
+        </p>
+        <div style="padding-top:20px"></div>
+        <p style="text-align: left;padding-left: 40px;font-size: 40px;width: 1000">
+           - future.get(3000, TimeUnit.MILLISECONDS);
+        </p>
+        <div style="padding-top:20px"></div>
+        <p style="text-align: left;font-size: 50px;color:#ff6363;width: 1200;">使用线程池时,要考虑抛弃策略的影响</p>
+      </div>
+
+      <div class="step press 29" data-x="1200000" data-y="-15000" data-scale="110" data-rotate="90">
+        <div class="subtitle tech" style="font-size: 65px;width: 1700;margin-left: -400">线程池队列的OOM</div>
+        <div style="padding-top:20px"></div>
+        <img src="img/kafkaOOM.png" width="1500" style="margin-left: -300" />
+        <div style="padding-top:20px"></div>
+        <p style="text-align: left;font-size: 50px;width: 1700"><span style="color:#ff6363;">Exception in thread "main" java.lang.OutOfMemoryError
+</span></p>
+      </div>
+
+      <div class="step press 30" data-x="240000" data-y="-30000" data-z="-100" data-scale="1" data-rotate="90">
+        <div class="subtitle tech" style="font-size: 65px;width: 1700;margin-left: -400">源码分析</div>
+        <div style="padding-top:20px"></div>
+        <img src="img/linkedBlockingQueue.png" width="1700" style="margin-left: -400" />
+        <div style="padding-top:20px"></div>
+        <p style="text-align: left;font-size: 50px;width: 1700;margin-left: -400"><span style="color:#4bff84;">允许的请求队列长度为 Integer.MAX_VALUE,可能会堆积大量的请求导致OOM</span></p>
+        <div style="padding-top:20px"></div>
+        <p style="text-align: left;font-size: 50px;width: 1700;margin-left: -400"><span style="color:#4bff84;">生产消费者模式下，要考虑平衡性</span></p>
+        <div style="padding-top:20px"></div>
+        <p style="text-align: left;font-size: 50px;width: 1700;margin-left: -400"><span style="color:#4bff84;">线程池在使用时需要考虑极端情况，显式控制线程池大小以及队列大小，明确丢弃策略带来的影响</span></p>
+      </div>
+
+      <div class="step press 31" data-x="40000" data-y="-28500" data-z="-100" data-scale="1" data-rotate="90" style="width: 1800">
+        <div class="subtitle tech" style="font-size: 65px;width: 1800;margin-left:">TimerTask异常导致任务全部失败</div>
+        
+      
+        <div style="padding-top:20px"></div>
+        <img src="img/timerTaskError.png" width="1200" style="margin-left:100" />
+        <div style="padding-top:20px"></div>
+        <div style="width: 1800;font-size: 40px">Exception in thread "Timer-0" java.lang.RuntimeException: exception</div>
+        <div style="padding-top:10px"></div>
+        <div style="width: 1800;font-size: 40px">at com.example.demo.TimeTestMulti$1.run(TimeTestMulti.java:16)</div>
+        <div style="padding-top:10px"></div>
+        <div style="width: 1800;font-size: 40px">at java.util.TimerThread.mainLoop(Timer.java:555)</div>
+      </div>
+
+
+      <div class="step press 32" data-x="160000" data-y="-27500" data-z="-100" data-scale="1" data-rotate="90">
+        <div class="subtitle tech" style="font-size: 65px;width: 1700;margin-left: -400">TimerTask异常导致任务全部失败</div>
+        <div style="padding-top:20px"></div>
+        <img src="img/timerClass.png" width="1200" style="margin-left: -200" />
+        <span style="color:#4bff84;text-align: left;font-size: 55;margin-left: -400">java.util.TimerThread#mainLoop</span>
+      </div>
+
+
+      <div class="step press 33" data-x="545000" data-y="-1500" rotate="-90" data-scale="100">
+         <div class="subtitle tech" style="font-size: 65px;width: 1700;margin-left: -400">Timer任务处理</div>
+         <div style="padding-top:20px"></div>
+         <img src="img/timer.png" width="1200" style="margin-left: -200" />
+      </div>
+
+      <div class="step press 34" data-x="9000" data-y="-125000" rotate="-90" data-scale="100" data-rotate-y="60" style="width: 1500">
+        <div class="subtitle tech" style="font-size: 65px;width: 1200;margin-left: ">小结</div>
+          <div class="subtitle sans" style="width: 1500;font-size: 55;margin-left: ">推荐使用<span style="color:#68fff2;">ScheduledThreadPoolExecutor</span>替代Timer</div>
+          <div style="padding-top:20px"></div>
+          <p style="font-size: 55;margin-left: -600">Timer:单线程</p>
+          <div style="padding-top:20px"></div>
+          <p style="margin-left: -20;font-size: 55">ScheduledThreadPoolExecutor:线程池</p>
+          <div style="padding-top:300"></div>
+      </div>
+
+
+      <div class="step press 35" data-x="250000" data-y="-1500" rotate="-90" data-scale="100" data-rotate-y="90">
+        <div class="subtitle tech" style="font-size: 65px;width: 1700;margin-left: -400">
+          ConcurrentLinkedQueue的OOM 
+        </div>
+        <img src="img/concurrentLinkedQueue.png" style="width: 1400;margin-left: -200">
+      </div>
+
+      <div class="step press 36" data-x="90000" data-y="85000" rotate="-90" data-scale="100" data-rotate-y="120">
+        <div class="subtitle tech" style="font-size: 65px;width: 1700;margin-left: -400">
+          源码分析
+        </div>
+        <img src="img/concurrentLinkedQueue-code.png" style="width:1300;margin-left: -300">
+        
+        while (queue.size()>0)      46236MS
+        <span style="color:#ffb84b;"">
+          while (!queue.isEmpty())   2126MS
+        </span>
+      </div>
+
+
+      <div class="step press 37" data-x="90000" data-y="185000" rotate="-90" data-scale="100" data-rotate-y="150">
+        <div class="subtitle tech" style="font-size: 65px;width: 1700;margin-left: -400">
+          使用有界队列
+        </div>
+        <img src="img/limitedQueue.png" style="width:1200;margin-left: -200">
+      </div>
+
+
+      <div class="step press 38" data-x="760000" data-y="-1500" rotate="-90" data-scale="100">
+        <div class="subtitle tech" style="font-size: 65px;width: 1700;margin-left: -400">
+          tomcat中的无界队列
+        </div>
+        <img src="img/tomcat-queue.png" style="width:1100;margin-left: -200">
+        <img src="img/tomcat-limit.png" style="width:1100;margin-left: -200">
+      </div>
+
+
+      <div class="step press 39" data-x="400000" data-y="-115000" data-rotate="90" data-scale="180">
+        <div class="subtitle tech" style="font-size: 65px;width: 1700;margin-left: -400">
+            log4j的死锁问题
+        </div>
+        <span style="color:#ffb84b;"">
+          日志输出时需要获取两个不同的锁对象</span>
+          <div style="padding-top:20"></div>
+        <span style="color:#ffb84b;"">当锁对象产生交叉时就会发生死锁</span>
+        <img src="img/log4j-deadlock.png" style="width:1000;margin-left: -300">
+      </div>
+
+
+      <div class="step press 40" data-x="690000" data-y="-150000" data-rotate="180" data-scale="90">
+        <div class="subtitle tech" style="font-size: 45px;width: 1200;margin-left: -200">
+            线程池
+        </div>
+        <img src="img/ThreadPoolExecutor.png" style="width:1100;margin-left: -300">
+        
+        <div style="padding-top:20px"></div>
+        <div style="width: 1400;font-size: 35px;text-align: left;margin-left: -300;">ThreadPoolExecutor执行execute方法分下面四种情况：</div>
+        <div style="padding-top:20"></div>
+        <div style="width: 1300;font-size: 35px;text-align: left;margin-left: -300;color: #ff6363">1、如果当前运行的线程少于corePoolSize，则创建新线程执行任务(注意这一步要获取全局锁)。</div>
+        <div style="padding-top:20"></div>
+        <div style="width: 1300;font-size: 35px;text-align: left;margin-left: -300;color: #ff6363">2、如果运行的线程等于或多余corePoolSize，则将任务加入BlockingQueue。</div>
+        <div style="padding-top:20"></div>
+        <div style="width: 1300;font-size: 35px;text-align: left;margin-left: -300;color: #ff6363">3、如果无法将任务加入BlockingQueue(队列已满)，则创建新的线程来处理任务(注意这一步要获取全局锁)。</div>
+        <div style="padding-top:20"></div>
+        <div style="width: 1300;font-size: 35px;text-align: left;margin-left: -300;color: #ff6363">4、如果创建新线程时当前运行的线程超出maximumPoolSize，任务将被拒绝，并调用
+        RejectedExecutionHandler.rejectedExecution方法。</div>
+      </div>
+
+      <div class="step press 41" data-x="600000" data-y="-170000" data-rotate="60" data-scale="100" style="width: 1800">
+        <div class="subtitle tech" style="font-size: 65px;width: 1800;margin-left: -100">
+            合理的配置线程池
+        </div>
+        <div style="padding-top:20px"></div>
+        <div style="width: 1350;font-size: 45px;text-align: left;margin-left: 200">CPU密集型任务应配置尽可能小的线程，如配置N(CPU)+1个线程的线程池。</div>
+        <div style="padding-top:20px"></div>
+        <div style="width: 1350;font-size: 45px;text-align: left;margin-left: 200">由于IO密集型任务线程并不一直在执行任务，则应该配置尽可能多的线程，如2*N(CPU)。</div>
+        <div style="padding-top:20px"></div>
+        <div style="width: 1350;font-size: 45px;text-align: left;margin-left: 200">可以通过Runtime.getRuntime().availableProcessors()方法获得当前设备的CPU个数。</div>
+        
+      </div>
+
+
+      <div class="step press 42" data-x="200000" data-y="-170000" data-rotate="60" data-scale="100" style="width: 1800">
+        <div class="subtitle tech" style="font-size: 55px;width: 1800;margin-left: -100">
+            队列类型对线程池的影响-无界队列
+        </div>
+        <div style="padding-top:20px"></div>
+        <div style="width: 1300;font-size: 45px;text-align: left;margin-left: 200">
+        LinkedBlockingQueue作为线程池的工作队列(队列的容量为Integer.MAX_VALUE)</div>
+        <div style="width: 1300;font-size: 45px;text-align: left;margin-left: 200">使用无界队列作为工作队列会对线程池带来如下影响：</div>
+        <div style="width: 1300;font-size: 45px;text-align: left;margin-left: 200">1）当线程池中的线程数达到corePoolSize，新任务将在无界队列中等待，因此线程池中的线程数不会超过corePoolSize。</div>
+        <div style="width: 1300;font-size: 45px;text-align: left;margin-left: 200">2）由于1，使用无界队列时，maximumPoolSize将无效。</div>
+        <div style="width: 1300;font-size: 45px;text-align: left;margin-left: 200">3）由于1和2，使用无界队列时keepAliveTime将无效。</div>
+        <div style="width: 1300;font-size: 45px;text-align: left;margin-left: 200">4）由于使用无界队列，运行中的FixedThreadPool不会拒绝任务。</div>
+      </div>
+
+
+      <div class="step press 43" data-x="1290000" data-y="-25000" data-rotate="75" data-scale="200" style="width: 1800">
+        <div class="subtitle tech" style="font-size: 50px;width: 1800;margin-left: -100">
+            队列类型对线程池的影响-SynchronousQueue
+        </div>
+        <div style="padding-top:20px"></div>
+        <div style="width: 1200;font-size: 30px;margin-left: 100">
+        public static ExecutorService newCachedThreadPool() {</div>
+        <div style="width: 1200;font-size: 30px;margin-left: 200">
+        return new ThreadPoolExecutor(0, Integer.MAX_VALUE,</div>
+        <div style="width: 1200;font-size: 30px;text-align: left;padding-left: 300">60L, TimeUnit.SECONDS,</div>
+        <div style="width: 1200;font-size: 30px;text-align: left;padding-left: 300">new SynchronousQueue<Runnable>());</div>
+        <div style="width: 1200;font-size: 30px;text-align: left;padding-left: ">}</div>
+        <div style="width: 1200;font-size: 30px;text-align: left;margin-left:200">1、corePoolSize被设置为0，即：corePool为空；</div>
+        <div style="width: 1200;font-size: 30px;text-align: left;margin-left:200 ">2、maximumPoolSize设置为Integer.MAX_VALUE。</div>
+        <div style="width: 1200;font-size: 30px;text-align: left;margin-left: 200">3、keepAliveTime设置为60L，意味着CachedThreadPool中的空闲线程等待新任务的最长时间为60秒，超过60秒空闲线程将被终止。</div>
+        <div style="width: 1200;font-size: 30px;text-align: left;margin-left:200 ">4、CachedThreadPool使用没有容量的SynchronousQueue作为线程池的工作队列，但CachedThreadPool的maximumPool是无界的，这意味着，主线程提交任务的速度高于maximumPool中线程处理任务的速度时，CachedThreadPool会不断创建新线程。</div><div style="width: 1800;font-size: 30px;text-align: left;margin-left: 200;color: #ff6363">5、极端情况下，
+        CachedThreadPool会因为创建过多线程而耗尽CPU和内存。
+        </div>
+      </div>
+
+    <div class="step press 44" data-x="1224700" data-y="-225000" data-scale="110" data-rotate="90" style="width: 2000">
+      <div class="subtitle tech" style="font-size: 65px;width: 1800;margin-left: -10">多线程编程-日常建议</div>
+        <div style="width: 1400px;font-size: 40px;text-align: left;margin-left: 250">
+        1、HashMap在容量不够进行resize时由于高并发可能出现死链，导致CPU飙升,可以使用其它数据结构或加锁来规避此风险。
+        </div>
+      <div style="padding-top:20px"></div>
+      <div style="width: 1400px;font-size: 40px;text-align: left;margin-left: 250">2、尽量不要在线程中做大量耗时的网络操作，如大批量数据查询</div>
+      <div style="padding-top:20px"></div>
+      <div style="width: 1400px;font-size: 40px;text-align: left;margin-left: 250">3、尽可能的减少多线程竞争锁,可以将数据分段,各个线程分别读取</div>
+      <div style="padding-top:20px"></div>
+      <div style="width: 1400px;font-size: 40px;text-align: left;margin-left: 250">
+      4、多利用CAS自旋的方式更新数据，减少锁的使用
+      </div>
+      <div style="padding-top:20px"></div>
+      <div style="width: 1400px;font-size: 40px;text-align: left;margin-left: 250">5、应用中加上-XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/tmp参数，在内存溢出时至少可以拿到内存日志</div>
+    </div>
+
+
+    <div class="step press 45" data-x="9000" data-y="-27500" data-z="-100" data-scale="1" data-rotate="90">
+        <div class="subtitle tech" style="font-size: 45px;width: 1800;margin-left:-500">多线程编程-锁优化(建议)</div>
+        <div style="width: 1400px;font-size: 30px;text-align: left;margin-left:-200">减小锁的持有时间，比如jdk中pattern类的处理(局部加锁)</div>
+        <img src="img/pattern-matcher.png" style="width:600;margin-left: -200">
+        <div style="width: 1400px;font-size: 30px;text-align: left;margin-left: -200">减小锁粒度ConcurrentHashMap分段加锁(默认情况下有16个段)</div>
+        <div style="padding-top:20px"></div>
+        <div style="width: 1400px;font-size: 30px;text-align: left;margin-left: -200">读多写少，使用读写锁</div>
+        <div style="padding-top:20px"></div>
+        <div style="width: 1400px;font-size: 30px;text-align: left;margin-left: -200">锁分离,LinkedBlockingQueue的take和put操作</div>
+        <div style="padding-top:20px"></div>
+        <div style="width: 1400px;font-size: 30px;text-align: left;margin-left: -200">锁粗化</div>
+        <img src="img/synchronized.png" style="width:600;margin-left: -300">
+    </div>
+
+    <div class="step press 46" data-x="1820000" data-y="-1500" rotate="-90" data-scale="100">
+        <div class="subtitle tech" style="font-size: 55px;width: 1800;margin-left:-500">多线程编程-线程池(建议)</div>
+        <div style="width: 1800px;font-size: 45px;text-align: left;margin-left: -300">1、创建线程或线程池时请指定有意义的线程名称，方便出错时回溯</div>
+        <div style="width: 1800px;font-size: 45px;text-align: left;margin-left: -300">2、线程资源通过线程池提供,不要在应用中自行显示创建线程</div>
+        <div style="width: 1800px;font-size: 45px;text-align: left;margin-left: -300;color:#ff6363;">
+        3、警惕Executors的陷阱：
+        </div>
+        <div style="padding-top:10px"></div>
+        <div style="width: 1800px;font-size: 45px;text-align: left;margin-left: -300;color:#ff6363;">
+            FixedThreadPool 和 SingleThreadPool</div>
+            <div style="width: 1800px;font-size: 45px;text-align: left;margin-left: -270;color:#ff6363;">
+              - 允许的请求队列长度为 Integer.MAX_VALUE，可能会堆积大量的请求，从而导致 OOM</div>
+            <div style="padding-top:10px"></div>
+            <div style="width: 1800px;font-size: 45px;text-align: left;margin-left: -300;color:#ff6363;">
+            CachedThreadPool 和 ScheduledThreadPool</div>
+            <div style="width: 1800px;font-size: 45px;text-align: left;margin-left: -270;color:#ff6363;">- 允许的创建线程数量为 Integer.MAX_VALUE，可能会创建大量的线程，从而导致 OOM。</div>
+    </div>
+
+    <div class="step press 47" data-x="250000" data-y="-115000" rotate="-90" data-scale="100" data-rotate-y="60">
+        <div class="subtitle tech" style="font-size: 65px;width: 1800;margin-left:-500">排查神器</div>
+        <div style="width: 1400px;font-size: 40px;text-align: left;margin-left: 200">
+          jps:列出jvm进程
+          <div style="padding-top:20px"></div>
+          jstack:线程状态
+          <div style="padding-top:20px"></div>
+          jinfo:系统启动的参数
+          <div style="padding-top:20px"></div>
+          jmap:查看堆的情况
+          <div style="padding-top:20px"></div>
+          visualVM:可视化性能分析
+          <div style="padding-top:20px"></div>
+          MemoryAnalyzer:内存分析工具
+          <div style="padding-top:20px"></div>
+          线程分析工具：http://fastthread.io/
+        </div>
+    </div>
+
+
+  </div>
+
+
+
+    <script src="./impress.js"></script>
+    <script type="text/javascript" src="./particle-network.min.js"></script>
+    <script>
+      if ("ontouchstart" in document.documentElement) {
+          document.querySelector(".hint").innerHTML = "<p>Tap on the left or right to navigate</p>";
+      }
+      impress().init();
+
+      var canvasDiv = document.getElementById('particle-canvas');
+      var options = {
+        particleColor: '#fff',
+        interactive: false,
+        speed: 'low',
+        density: 'medium',
+        speed: 'slow'
+      };
+      var particleCanvas = new ParticleNetwork(canvasDiv, options);
+
+      window.dispatchEvent(new Event('resize'));
+    </script>
+  </body>
+</html>
