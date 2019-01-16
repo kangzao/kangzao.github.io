@@ -2,8 +2,8 @@
 title: java面试及笔试热点问题
 published: true
 layout: post
-tag: interview
-categories: java
+tag: java
+categories: interview
 date: 2018-08-06
 author: 恩来小平
 ---
